@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<script>
+    var ic_url = "{{ url_for("static", filename = "files/sat.svg") }}"
+</script>
+<div class="container-fluid d-flex justify-content-center h-100">
+    <div id="map" class="map" style="position: absolute;"></div>
+</div>
+{% endblock content %}
