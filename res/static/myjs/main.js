@@ -4,7 +4,9 @@ jQuery(function () {
     var docWidth = $(document).width();
     var docHeight = $(document).height();
     var headerHeight = $("header").height();
-    $("#map").css({ "width": docWidth, "height": (docHeight-headerHeight) });
+    var colWidth = $("#firstCol").width();
+    $("#map").width(docWidth - colWidth).height(docHeight -headerHeight);
+    // $("#map").css({ "height": (), "width": () });
     // Load map
     var map = new ol.Map({
         target: 'map',
@@ -52,12 +54,23 @@ jQuery(function () {
     // drawsatellite
     function drawSatellitePath() {
         $.ajax({
-            url: 'http://127.0.0.1:5000/cord',
+            // url: 'http://127.0.0.1:5000/cord',
+            url: 'http://127.0.0.1:5000/satdata',
             type: 'GET',
             success: function (data) {
                 // Extract coordinates from the response data
-                var latitude = data[0];
-                var longitude = data[1];
+                var latitude = data['lat_end'];
+                var longitude = data['long_end'];
+                var ra = data['ra']
+                var dec = data['dec']
+                // Change view details
+                $("#s_id").html(data['id']);
+                $("#s_name").html(data['name']);
+                $("#s_alt").html(data['alt']);
+                $("#s_lat").html((Math.round(latitude * 100) / 100).toFixed(2));
+                $("#s_long").html((Math.round(longitude * 100) / 100).toFixed(2));
+                $("#s_ra").html((Math.round(ra * 100) / 100).toFixed(2));
+                $("#s_dec").html((Math.round(dec * 100) / 100).toFixed(2));
 
                 // Get the current coordinate
                 var currentCoordinate = ol.proj.fromLonLat([longitude, latitude]);
@@ -98,7 +111,7 @@ jQuery(function () {
                 console.error('Error fetching satellite position data:', error);
 
                 // Call drawSatellitePath again after 10 seconds
-                setTimeout(drawSatellitePath, 5000);
+                setTimeout(drawSatellitePath, 10000);
             }
         });
     }

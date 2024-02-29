@@ -4,7 +4,38 @@
 <script>
     var ic_url = "{{ url_for("static", filename = "files/sat.svg") }}"
 </script>
-<div class="container-fluid d-flex justify-content-center h-100">
-    <div id="map" class="map" style="position: absolute;"></div>
+<!-- <div class="container-fluid d-flex justify-content-center h-100"> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 border">
+            <div class="container mt-3" id="firstCol">
+                <p class="fs-6">NORAD ID: 
+                    <strong id="s_id"></strong>
+                </p>
+                <p class="fs-6">Name: 
+                    <strong id="s_name"></strong>
+                </p>
+                <p class="fs-6">Altitude: 
+                    <strong id="s_alt"></strong> <strong>KM</strong>
+                </p>
+                <p class="fs-6">Latitude: 
+                    <strong id="s_lat"></strong>
+                </p>
+                <p class="fs-6">Longitude: 
+                    <strong id="s_long"></strong>
+                </p>
+                <p class="fs-6">Right Ascension: 
+                    <strong id="s_ra"></strong><strong>°</strong>
+                </p>
+                <p class="fs-6">Declination: 
+                    <strong id="s_dec"></strong><strong>°</strong>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-10 border">
+            <div id="map" class="map" style="position: absolute;"></div>
+        </div>
+    </div>
 </div>
+    
 {% endblock content %}
